@@ -134,55 +134,6 @@
 </style>
 </head>
 <body>
-<!-- ============ SITE PASSWORD GATE (client-side soft protection) ============ -->
-<div id="ss-gate" role="dialog" aria-modal="true" aria-label="Password required">
-  <form id="ss-gate-form">
-    <div class="ss-gate-mark">SHELLEY&nbsp;SUH</div>
-    <p class="ss-gate-msg">This site is private. Please enter the password to continue.</p>
-    <input type="password" id="ss-gate-pw" autocomplete="current-password" placeholder="Password" aria-label="Password">
-    <button type="submit">Enter</button>
-    <div id="ss-gate-err" aria-live="polite"></div>
-  </form>
-</div>
-<style>
-  #ss-gate{position:fixed;inset:0;z-index:2147483647;background:#FBF8F4;display:flex;align-items:center;justify-content:center;padding:24px;font-family:'Poppins',-apple-system,'Helvetica Neue',Arial,sans-serif;}
-  #ss-gate-form{width:100%;max-width:340px;text-align:center;}
-  #ss-gate .ss-gate-mark{font-size:24px;letter-spacing:6px;color:#47513C;font-weight:600;margin-bottom:18px;}
-  #ss-gate .ss-gate-msg{font-size:14px;line-height:1.5;color:#6E7360;margin:0 0 20px;}
-  #ss-gate input{width:100%;padding:12px 14px;border:1px solid #D3C4A4;border-radius:6px;background:#fff;font-size:15px;color:#47513C;outline:none;box-sizing:border-box;}
-  #ss-gate input:focus{border-color:#47513C;}
-  #ss-gate button{width:100%;margin-top:12px;padding:12px;border:none;border-radius:6px;background:#B04034;color:#fff;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;}
-  #ss-gate button:hover{background:#8F342A;}
-  #ss-gate #ss-gate-err{min-height:18px;margin-top:12px;font-size:13px;color:#B04034;}
-  html.ss-locked,body.ss-locked{overflow:hidden !important;}
-</style>
-<script>
-(function(){
-  /* ====== CHANGE THE SITE PASSWORD HERE ====== */
-  var SS_PW = "782Townline";
-  /* =========================================== */
-  var KEY="ss_site_access", gate=document.getElementById('ss-gate');
-  if(!gate) return;
-  if(sessionStorage.getItem(KEY)==='granted'){ gate.parentNode.removeChild(gate); return; }
-  document.documentElement.classList.add('ss-locked');
-  var form=document.getElementById('ss-gate-form'),
-      pw=document.getElementById('ss-gate-pw'),
-      err=document.getElementById('ss-gate-err');
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    if(pw.value===SS_PW){
-      sessionStorage.setItem(KEY,'granted');
-      document.documentElement.classList.remove('ss-locked');
-      gate.parentNode.removeChild(gate);
-    } else {
-      err.textContent="Incorrect password. Please try again.";
-      pw.value=""; pw.focus();
-    }
-  });
-  pw.focus();
-})();
-</script>
-<!-- ============ END SITE PASSWORD GATE ============ -->
 
 
 <header>
